@@ -1,0 +1,12 @@
+#!/bin/bash
+
+O2T2O.py $BASENAME.inp $BASENAME.pc -O2T
+
+echo "Calling TURBOMOLE"
+ridft > ridft.out
+rdgrad > rdgrad.out
+
+O2T2O.py $BASENAME.engrad $BASENAME.pcgrad -T2O
+
+echo "TURBOMOLE output translated to ORCA."
+

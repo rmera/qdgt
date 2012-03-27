@@ -1,0 +1,47 @@
+This is the Quick & Dirty QMMM interface for GROMACS(tm) and TURBOMOLE(tm). 
+In order to use it, you need to previously obtain a copy of these two software packages.
+The interface consist in a little shell script that
+is called by GROMACS instad of ORCA(tm), and Python script which translates the ORCA input (which GROMACS writes) 
+to TURBOMOLE input, and the TURBOMOLE output to ORCA output (which GROMACS reads). Of course doing things in 
+this lazy way is not very CPU-efficient (and involves a more disk access), but the oeverhead is nothing compared to the QM single point
+calculations, which will always be the bottleneck. Perhaps in a VERY big MM system with a very small QM
+subsystem, the CPU overhead might be noticeable. In this case, there is no reason to use Turbomole 
+instead of ORCA :-).
+
+
+***How to use the fakeorca and the O2T2O.py scripts to run QMMM calculations with TURBOMOLE***
+
+
+Compile GROMACS with support for ORCA QMMM (i.e.  ./configure --with-qmmm-orca --without-qmmm-gaussian).
+
+Place the O2T2O.py script in the PATH.
+
+Prepare a normal Gromacs/Orca QMMM simulation. 
+
+Modify the fakeorca shell script so it run the calculations you want (byt default it runs ridft and rdgrad).
+
+Rename the fakeorca script to "orca" and put it in some directory. Create the environment variable
+ORCA_PATH with the full path to that directory. 
+
+If you have non-standard molecules in the QM system, you will need dummy parameters for them.
+
+Run grompp and mdrun as normal. If mdrun doesnt crash after calling the fake orca, kill it.
+
+A "BASENAME.xyz" file will be produced, where BASENAME is an enviroment variable set as part of the normal QMMM procedure. 
+Use the file to generate a coord file and set up a turbomole calculation.
+
+Include the keyword "point charges" in the section $drvopt. Also include the line "$grad file=gradient" in the control file. 
+
+Rename the control file to control-template.
+
+Now run mdrun again. Remember to use the option "-nt 1 "
+
+
+
+
+
+
+
+
+
+
