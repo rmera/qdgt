@@ -1,7 +1,7 @@
-This is the Quick & Dirty QMMM interface for GROMACS(tm) and TURBOMOLE(tm). 
+This is the Quick & Dirty QMMM interface for GROMACS and TURBOMOLE. 
 In order to use it, you need to previously obtain a copy of these two software packages.
 The interface consist in a little shell script that
-is called by GROMACS instad of ORCA(tm), and Python script which translates the ORCA input (which GROMACS writes) 
+is called by GROMACS instad of ORCA, and a Python script which translates the ORCA input (which GROMACS writes) 
 to TURBOMOLE input, and the TURBOMOLE output to ORCA output (which GROMACS reads). Of course doing things in 
 this lazy way is not very CPU-efficient (and involves a more disk access), but the oeverhead is nothing compared to the QM single point
 calculations, which will always be the bottleneck. Perhaps in a VERY big MM system with a very small QM
@@ -18,7 +18,7 @@ Place the O2T2O.py script in the PATH.
 
 Prepare a normal Gromacs/Orca QMMM simulation. 
 
-Modify the fakeorca shell script so it run the calculations you want (byt default it runs ridft and rdgrad).
+Modify the fakeorca shell script so it run the calculations you want (by default it runs ridft and rdgrad).
 
 Rename the fakeorca script to "orca" and put it in some directory. Create the environment variable
 ORCA_PATH with the full path to that directory. 
@@ -36,7 +36,7 @@ Rename the control file to control-template.
 
 Now run mdrun again. Remember to use the option "-nt 1 "
 
-
+When you use the MD and QM programs called by qdgt, please cite the appropiate references.
 
 
 
